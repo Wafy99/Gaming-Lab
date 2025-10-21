@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    private Animator anim;
     public float moveSpeed;
     public float jumpHeight;
 
@@ -18,12 +19,20 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        anim.SetFloat("Speed",Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x));
+        anim.SetFloat("Height", GetComponent<Rigidbody2D>().velocity.y);
+        anim.SetBool("Grounded", grounded);
+
+
+
         if(Input.GetKeyDown(Spacebar)&& grounded){
             Jump();
         }
